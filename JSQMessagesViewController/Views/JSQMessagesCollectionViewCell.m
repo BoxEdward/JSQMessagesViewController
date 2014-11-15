@@ -227,10 +227,10 @@
     self.cellBottomLabel.backgroundColor = backgroundColor;
     
     self.messageBubbleImageView.backgroundColor = backgroundColor;
-    self.avatarImageView.backgroundColor = backgroundColor;
+    self.avatarImageView.backgroundColor = [UIColor clearColor];
     
     self.messageBubbleContainerView.backgroundColor = backgroundColor;
-    self.avatarContainerView.backgroundColor = backgroundColor;
+    self.avatarContainerView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)setAvatarViewSize:(CGSize)avatarViewSize
@@ -261,7 +261,7 @@
         return;
     }
     
-    [self.messageBubbleImageView removeFromSuperview];
+    //[self.messageBubbleImageView removeFromSuperview];
     [self.textView removeFromSuperview];
     
     [mediaView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -269,14 +269,22 @@
     
     [self.messageBubbleContainerView addSubview:mediaView];
     [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:mediaView];
+    /*
+    [self.messageBubbleContainerView jsq_pinSubview:mediaView toEdge:NSLayoutAttributeTop withConstant:-5];
+    [self.messageBubbleContainerView jsq_pinSubview:mediaView toEdge:NSLayoutAttributeBottom withConstant:5];
+    [self.messageBubbleContainerView jsq_pinSubview:mediaView toEdge:NSLayoutAttributeLeft withConstant:-5];
+    [self.messageBubbleContainerView jsq_pinSubview:mediaView toEdge:NSLayoutAttributeRight withConstant:5];
+*/
     _mediaView = mediaView;
     
     //  because of cell re-use (and caching media views, if using built-in library media item)
     //  we may have dequeued a cell with a media view and add this one on top
     //  thus, remove any additional subviews hidden behind the new media view
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         for (NSUInteger i = 0; i < self.messageBubbleContainerView.subviews.count; i++) {
-            if (self.messageBubbleContainerView.subviews[i] != _mediaView) {
+            NSLog(@"%@",self.messageBubbleContainerView.subviews[i]);
+            if (self.messageBubbleContainerView.subviews[i] != _mediaView && self.messageBubbleContainerView.subviews[i] != _messageBubbleImageView) {
                 [self.messageBubbleContainerView.subviews[i] removeFromSuperview];
             }
         }
