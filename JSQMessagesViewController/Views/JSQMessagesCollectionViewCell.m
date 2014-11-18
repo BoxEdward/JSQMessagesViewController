@@ -272,10 +272,10 @@
     [self.messageBubbleContainerView addSubview:mediaView];
     //[self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:mediaView];
     
-    [self.messageBubbleContainerView jsq_pinSubview:mediaView toEdge:NSLayoutAttributeTop withConstant:-5];
-    [self.messageBubbleContainerView jsq_pinSubview:mediaView toEdge:NSLayoutAttributeBottom withConstant:5];
-    [self.messageBubbleContainerView jsq_pinSubview:mediaView toEdge:NSLayoutAttributeLeft withConstant:-5];
-    [self.messageBubbleContainerView jsq_pinSubview:mediaView toEdge:NSLayoutAttributeRight withConstant:5];
+    [self.messageBubbleContainerView jsq_pinSubview:mediaView toEdge:NSLayoutAttributeTop withConstant:-2.5];
+    [self.messageBubbleContainerView jsq_pinSubview:mediaView toEdge:NSLayoutAttributeBottom withConstant:2.5];
+    [self.messageBubbleContainerView jsq_pinSubview:mediaView toEdge:NSLayoutAttributeLeft withConstant:-2.5];
+    [self.messageBubbleContainerView jsq_pinSubview:mediaView toEdge:NSLayoutAttributeRight withConstant:2.5];
 
     _mediaView = mediaView;
     
