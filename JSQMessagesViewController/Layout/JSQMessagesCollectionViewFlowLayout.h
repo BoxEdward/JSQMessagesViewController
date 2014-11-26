@@ -194,4 +194,6 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
  */
 - (CGSize)sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
 
+@property (strong, nonatomic) NSDictionary *textAttributes;
+
 @end

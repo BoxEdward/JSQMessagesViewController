@@ -87,6 +87,8 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     _messageBubbleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     
+    _textAttributes = @{NSFontAttributeName : _messageBubbleFont};
+    
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         _messageBubbleLeftRightMargin = 240.0f;
     }
@@ -453,11 +455,18 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         
         CGFloat horizontalInsetsTotal = horizontalContainerInsets + horizontalFrameInsets + spacingBetweenAvatarAndBubble;
         CGFloat maximumTextWidth = self.itemWidth - avatarSize.width - self.messageBubbleLeftRightMargin - horizontalInsetsTotal;
-        
+        /*
         CGRect stringRect = [[messageItem text] boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
                                                              options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
                                                           attributes:@{ NSFontAttributeName : self.messageBubbleFont }
                                                              context:nil];
+        */
+        
+        
+        NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[messageItem text]
+                                                                         attributes:self.textAttributes];
+        
+        CGRect stringRect = [attrString boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
         
         CGSize stringSize = CGRectIntegral(stringRect).size;
         

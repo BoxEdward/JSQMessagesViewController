@@ -440,7 +440,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.delegate = collectionView;
     
     if (!isMediaMessage) {
-        cell.textView.text = [messageItem text];
+        //cell.textView.text = [messageItem text];
+
+        cell.textView.attributedText = [[NSAttributedString alloc] initWithString:[messageItem text]
+                                                                       attributes:self.collectionView.collectionViewLayout.textAttributes];
         NSParameterAssert(cell.textView.text != nil);
     }
     else {
